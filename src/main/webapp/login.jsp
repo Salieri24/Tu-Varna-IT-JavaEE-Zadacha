@@ -6,6 +6,7 @@
         <meta charset="UTF-8">
     </head>
     <body>
+
         <div class = "wrapper">
             <h1>Влизане в системата</h1>
             <div class = "container">
@@ -23,6 +24,11 @@
                 <input type = "submit" value = "Вход">
                 </form>
             </div>
+            <%if(session.getAttribute("error")!=null){%>
+            <div class="error-field">
+                ${sessionScope.error}
+            </div>
+            <%}%>
         </div>
         <h1>Don't have an account?<br><a href="index.jsp">Create an account</a></h1>
     </body>

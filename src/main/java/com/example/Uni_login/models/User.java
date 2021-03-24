@@ -1,8 +1,10 @@
 package com.example.Uni_login.models;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
-public class User { //user with different abilities
+public class User implements Serializable { //user with different abilities
     private String name;
     private String username;
     private String password;
@@ -13,6 +15,7 @@ public class User { //user with different abilities
         this.username = username;
         this.password = password;
     }
+
 
     public String getName() {
         return name;
@@ -48,6 +51,18 @@ public class User { //user with different abilities
     public void addAbility(Ability x)
     {
         abilities.add(x);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return username.equals(user.username) && password.equals(user.password);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, password);
     }
 
     @Override

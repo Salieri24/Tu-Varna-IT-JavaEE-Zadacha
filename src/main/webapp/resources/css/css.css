@@ -45,3 +45,8 @@ input[type = "submit" i]{
     cursor: pointer;
     border: none;
 }
+.error-field {background-color: #f6353559;
+    text-align: center;
+    margin: auto;
+    border: 5px solid #e42626b0;
+}

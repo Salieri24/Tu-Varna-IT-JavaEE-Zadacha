@@ -6,6 +6,7 @@
         <meta charset="UTF-8">
     </head>
     <body>
+
         <div class = "wrapper">
             <h1>Създаване на профил</h1>
             <div class = "container">
@@ -33,6 +34,11 @@
                 </form>
 
             </div>
+            <%if(session.getAttribute("error")!=null){%>
+            <div class="error-field">
+                ${sessionScope.error}
+            </div>
+            <%}%>
             
         </div>
         			<h1> Have an account?<br><a href="login.jsp">Log in</a> </h1>

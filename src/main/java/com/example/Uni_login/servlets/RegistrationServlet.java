@@ -1,5 +1,7 @@
 package com.example.Uni_login.servlets;
 
+import com.example.Uni_login.Repository;
+import com.example.Uni_login.Validation;
 import com.example.Uni_login.models.User;
 import com.example.Uni_login.models.Users;
 
@@ -10,75 +12,70 @@ import java.io.IOException;
 
 @WebServlet(name = "RegistrationServlet", value = "/RegistrationServlet")
 public class RegistrationServlet extends HttpServlet {
+    private Repository usersRep;
+
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void init() throws ServletException {
+        super.init();
+        usersRep= new Repository();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 //      create account and redirect
         String name = request.getParameter("name");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String password2 = request.getParameter("password2");
 
         try {
-            if (!checkName(name)) {
+            if (!Validation.checkName(name)) {
                 throw new Exception("Name must be valid");
             }
-            if (!checkUsername(username)) {
+            if (!Validation.checkUsername(username)) {
                 throw new Exception("Username must be valid");
             }
 
-            if (!checkPassword(password)) {
+            if (!Validation.checkPassword(password)) {
                 throw new Exception("Password must be valid");
+            }
+            if (!password.equals(password2)) {
+                throw new Exception("Passwords do not match!");
+            }
+
+
+            Users users = usersRep.getUsers();
+
+            if(users.checkForUsername(username))
+            {
+                throw new Exception("The username already exists!");
+            }
+            else{
+                User user = new User(name,username,password);
+                users.addUser(user);
+
+                HttpSession session = request.getSession();
+                session.setAttribute("error","Your account has been created! Now, please log in!");
+
+                response.sendRedirect(request.getContextPath() +"/login.jsp");
             }
         } catch (Exception e)
         {
-            e.printStackTrace();
-        }
-
-        if(checkForUser(username,password))
-        {
-            System.out.println("username already exists");
-            // Notify the user that the username already exists
-        }
-        else{
-            User user = new User(name,username,password);
-            Users users = new Users();// actually i should load it from a database somewhere
-            users.addUser(user);
-
             HttpSession session = request.getSession();
+            session.setAttribute("error","Error: "+e.getMessage());
 
-            session.setAttribute("User", user);
+            response.sendRedirect(request.getContextPath() +"/index.jsp");
 
-            System.out.println(session.getAttribute("User"));
-
-            response.sendRedirect(request.getContextPath() +"/dashboard.jsp");
         }
 
 
     }
 
-    private boolean checkPassword(String password) {
 
-        //Todo: checks if the password meets the requirements
-        return true;
-    }
-
-    private boolean checkUsername(String username) {
-        //Todo: checks if the password meets the requirements
-        return true;
-    }
-
-    private boolean checkName(String name) {
-        //Todo: checks if the password meets the requirements
-        return true;
-    }
-
-    private boolean checkForUser(String username, String password) {
-        return false;
-        //Todo: actually check.
-    }
 }
