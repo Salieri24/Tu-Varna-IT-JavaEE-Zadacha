@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Task1</title>
-        <link rel="stylesheet" href="resources/css/css.css">
+        <link rel="stylesheet" href="webResources/css/css.css">
         <meta charset="UTF-8">
     </head>
     <body>

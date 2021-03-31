@@ -1,6 +1,7 @@
 package com.example.Uni_login.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,14 +9,26 @@ public class User implements Serializable { //user with different abilities
     private String name;
     private String username;
     private String password;
-    private List<Ability> abilities;
+    private String workName;
+    private String description;
+    private String email;
+    private String town;
+    private String phone;
+    private String address;
+    private List<Ability> profAbilities = new ArrayList<>();
+    private List<Ability> persAbilities = new ArrayList<>();
+
+    public User() {
+    }
 
     public User(String name, String username, String password) {
         this.name = name;
         this.username = username;
         this.password = password;
-    }
 
+        this.addProfAbility(new Ability("Java",50));
+        this.addPersAbility(new Ability("Communicaiton",62));
+    }
 
     public String getName() {
         return name;
@@ -41,17 +54,79 @@ public class User implements Serializable { //user with different abilities
         this.password = password;
     }
 
-    public Ability getAbility(String name){
-        for(Ability x : abilities) {
-            if(x.getName().equals(name))
-            return x;
-        }
-        return null;
+    public void setWorkName(String workName) {
+        this.workName = workName;
     }
-    public void addAbility(Ability x)
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTown() {
+        return town;
+    }
+
+    public void setTown(String town) {
+        this.town = town;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public List<Ability> getProfAbilities() {
+        return profAbilities;
+    }
+
+    public void setProfAbilities(List<Ability> profAbilities) {
+        this.profAbilities = profAbilities;
+    }
+
+    public List<Ability> getPersAbilities() {
+        return persAbilities;
+    }
+
+    public void setPersAbilities(List<Ability> persAbilities) {
+        this.persAbilities = persAbilities;
+    }
+
+    public void addProfAbility(Ability x)
     {
-        abilities.add(x);
+        profAbilities.add(x);
     }
+
+    public void addPersAbility(Ability x)
+    {
+        persAbilities.add(x);
+    }
+    public String getWorkName() {
+        return workName;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -71,7 +146,7 @@ public class User implements Serializable { //user with different abilities
                 "name='" + name + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", abilities=" + abilities +
+                ", abilities=" + profAbilities +
                 '}';
     }
 }

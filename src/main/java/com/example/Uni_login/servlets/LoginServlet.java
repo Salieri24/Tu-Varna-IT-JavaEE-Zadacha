@@ -2,6 +2,7 @@ package com.example.Uni_login.servlets;
 
 import com.example.Uni_login.Repository;
 import com.example.Uni_login.Validation;
+import com.example.Uni_login.models.Ability;
 import com.example.Uni_login.models.User;
 import com.example.Uni_login.models.Users;
 
@@ -43,8 +44,8 @@ public class LoginServlet extends HttpServlet {
 
 
         User user = new User("",username,password);
-
-        if(users.checkForUser(user)!=null) {
+        user = users.checkForUser(user);
+        if(user!=null) {
             HttpSession session = request.getSession();
             session.setAttribute("User", user);
             response.sendRedirect(request.getContextPath() + "/dashboard.jsp");

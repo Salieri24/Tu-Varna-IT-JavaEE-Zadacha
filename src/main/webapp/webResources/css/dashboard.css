@@ -53,6 +53,7 @@ img {
 
 .ability-right {
     margin-left: 20px;
+    margin-right: 20px;
 }
 
 .inner-pane div .ability {
@@ -89,5 +90,5 @@ p {
 
 a {
     color: #ffb606;
-    text-decoration: none;
+    text-decoration: underline;
 }
