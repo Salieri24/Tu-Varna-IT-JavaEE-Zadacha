@@ -2,13 +2,12 @@ package com.example.Uni_login.servlets;
 
 import com.example.Uni_login.Repository;
 import com.example.Uni_login.Validation;
-import com.example.Uni_login.models.Ability;
 import com.example.Uni_login.models.User;
 import com.example.Uni_login.models.Users;
 
-import javax.servlet.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import javax.servlet.annotation.*;
 import java.io.IOException;
 
 @WebServlet(name = "LoginServlet", value = "/LoginServlet")
@@ -20,14 +19,21 @@ public class LoginServlet extends HttpServlet {
         usersRep= new Repository();
     }
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        Cookie cookie = null;
+        for(Cookie c : request.getCookies())
+        {
+            if(c.getName().equals("remember")) cookie = c;
+        }
+        if(session!=null && cookie!=null && session.getId().equals(cookie.getValue()))
+            response.sendRedirect(request.getContextPath() +"/Dashboard");
+        else
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        //check for account and then redirect.
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Users users = usersRep.getUsers();
 
         String username = request.getParameter("username");
@@ -48,17 +54,18 @@ public class LoginServlet extends HttpServlet {
         if(user!=null) {
             HttpSession session = request.getSession();
             session.setAttribute("User", user);
-            response.sendRedirect(request.getContextPath() + "/dashboard.jsp");
+            Cookie cookie = new Cookie("remember", session.getId());
+            response.addCookie(cookie);
+            response.sendRedirect(request.getContextPath() + "/Dashboard");
+//            response.sendRedirect(request.getContextPath() + "/Edit?id="+user.getId());
         }
         else {
             throw new Exception("Username or Password are incorrect");
         }
         } catch (Exception e)
         {
-            HttpSession session = request.getSession();
-            session.setAttribute("error","Error: "+e.getMessage());
-
-            response.sendRedirect(request.getContextPath() +"/login.jsp");
+            request.setAttribute("error","Error: "+e.getMessage());
+            doGet(request,response);
         }
     }
 

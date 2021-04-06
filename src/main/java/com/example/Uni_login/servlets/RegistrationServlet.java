@@ -21,14 +21,22 @@ public class RegistrationServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        Cookie cookie = null;
+        for(Cookie c : request.getCookies())
+        {
+            if(c.getName().equals("remember")) cookie = c;
+        }
+        if(session!=null && cookie!=null && session.getId().equals(cookie.getValue()))
+            response.sendRedirect(request.getContextPath() +"/Dashboard");
+        else
+        request.getRequestDispatcher("index.jsp").forward(request, response);
 
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-//      create account and redirect
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String name = request.getParameter("name");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -60,18 +68,13 @@ public class RegistrationServlet extends HttpServlet {
                 User user = new User(name,username,password);
                 users.addUser(user);
 
-                HttpSession session = request.getSession();
-                session.setAttribute("error","Your account has been created! Now, please log in!");
-
-                response.sendRedirect(request.getContextPath() +"/login.jsp");
+                response.sendRedirect(request.getContextPath() +"/Login");
             }
         } catch (Exception e)
         {
-            HttpSession session = request.getSession();
-            session.setAttribute("error","Error: "+e.getMessage());
+            request.setAttribute("error","Error: "+e.getMessage());
 
-            response.sendRedirect(request.getContextPath() +"/index.jsp");
-
+            doGet(request,response);
         }
 
 

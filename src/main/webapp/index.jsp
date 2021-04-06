@@ -10,7 +10,7 @@
         <div class = "wrapper">
             <h1>Създаване на профил</h1>
             <div class = "container">
-                <form action = "RegistrationServlet" method="post" >
+                <form action = "${pageContext.request.contextPath}/Registration" method="post" >
                     <div class = "textfield">
                         <label for="name">Име:</label>
                         <input name = "name" id = "name" type ="text" placeholder="Въведете име за контакт" >
@@ -34,9 +34,9 @@
                 </form>
 
             </div>
-            <%if(session.getAttribute("error")!=null){%>
+            <%if(request.getAttribute("error")!=null){%>
             <div class="error-field">
-                ${sessionScope.error}
+                ${requestScope.error}
             </div>
             <%}%>
             

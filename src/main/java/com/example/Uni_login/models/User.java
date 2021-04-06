@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 public class User implements Serializable { //user with different abilities
+    private long id;
     private String name;
     private String username;
     private String password;
@@ -19,15 +21,27 @@ public class User implements Serializable { //user with different abilities
     private List<Ability> persAbilities = new ArrayList<>();
 
     public User() {
+        Random rand = new Random();
+        id = rand.nextLong();
     }
 
     public User(String name, String username, String password) {
+        Random rand = new Random();
+        id = rand.nextLong();
         this.name = name;
         this.username = username;
         this.password = password;
 
         this.addProfAbility(new Ability("Java",50));
         this.addPersAbility(new Ability("Communicaiton",62));
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {

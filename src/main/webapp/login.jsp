@@ -10,7 +10,7 @@
         <div class = "wrapper">
             <h1>Влизане в системата</h1>
             <div class = "container">
-                <form method="post" action="LoginServlet">
+                <form method="post" action="${pageContext.request.contextPath}/Login">
                     <div class = "textfield">
                         <label>Потребителско име:
                         <input name = "username" type ="text" placeholder="Въведете потребителско име" >

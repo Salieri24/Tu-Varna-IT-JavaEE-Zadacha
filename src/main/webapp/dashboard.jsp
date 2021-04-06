@@ -1,5 +1,3 @@
-
-<%@ page import="com.example.Uni_login.models.Ability" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -16,7 +14,6 @@
     <jsp:setProperty name="User" property="description" value="Известен факт е, че читателя обръща внимаие на съдържанието, което чете, а не на оформлението му.
                     Свойството на Lorem Ipsum e, че до голяма степен има нормално разпределение
                     на буквите и се чете по-лесно, за разлика от нормален текст на английски език като 'Това е съдържание, това е съдържание'."/>
-
     <jsp:setProperty name="User" property="email" value="ivan@tu-varna.bg"/>
     <jsp:setProperty name="User" property="town" value="Варна"/>
     <jsp:setProperty name="User" property="phone" value="09876543219"/>
@@ -24,7 +21,7 @@
 
 <html>
 <head>
-    <title>Title</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="webResources/css/dashboard.css">
 </head>
 <body>
@@ -60,34 +57,6 @@
                         </div>
                     </div>
                 </c:forEach>
-<%--                <div class="ability">
-                    <h4>Java</h4>
-                    <div class="loading-background">
-                        <div style="width: " class="loading-bar">
-                        </div>
-                    </div>
-                </div>
-                <div class="ability">
-                    <h4>HTML</h4>
-                    <div class="loading-background">
-                        <div style="width: 32%" class="loading-bar">
-                        </div>
-                    </div>
-                </div>
-                <div class="ability">
-                    <h4>CSS</h4>
-                    <div class="loading-background">
-                        <div style="width: 32%" class="loading-bar">
-                        </div>
-                    </div>
-                </div>
-                <div class="ability">
-                    <h4>JavaScript</h4>
-                    <div class="loading-background">
-                        <div style="width: 32%" class="loading-bar">
-                        </div>
-                    </div>
-                </div>--%>
             </div>
             <div class="ability-right">
                 <h3>Личностни</h3>
@@ -102,28 +71,6 @@
                             </div>
                         </div>
                 </c:forEach>
-
-<%--                <div class="ability">
-                    <h4>Комуникативност</h4>
-                    <div class="loading-background">
-                        <div style="width: 32%" class="loading-bar">
-                        </div>
-                    </div>
-                </div>
-                <div class="ability">
-                    <h4>Екиптна работа</h4>
-                    <div class="loading-background">
-                        <div style="width: 32%" class="loading-bar">
-                        </div>
-                    </div>
-                </div>
-                <div class="ability">
-                    <h4>Креативност</h4>
-                    <div class="loading-background">
-                        <div style="width: 32%" class="loading-bar">
-                        </div>
-                    </div>
-                </div>--%>
             </div>
         </div>
         <h2>Контакти</h2>

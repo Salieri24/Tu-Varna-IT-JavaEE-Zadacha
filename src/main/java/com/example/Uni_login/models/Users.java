@@ -32,5 +32,16 @@ public class Users {    //collection of users
         }
         return false;
     }
+
+    public User getUserById(long id) {
+        if(Users.isEmpty()) return null;
+        for(User x : Users)
+        {
+            if (x.getId()==id){
+                return x;
+            }
+        }
+        return null;
+    }
 }
 
