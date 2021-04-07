@@ -21,6 +21,7 @@ img {
 .wrapper {
     margin: 20px 12.5%;
     display: inline-block;
+    width:75%;
 }
 
 .inner-pane, .footer-pane {
@@ -91,4 +92,17 @@ p {
 a {
     color: #ffb606;
     text-decoration: underline;
+}
+
+.textbox, .search-box{
+    padding: 10px 5px;
+    border-radius: 10px;
+    border: 2px solid grey;
+}
+.btn{
+    margin: 20px auto;
+    display: block;
+    padding: 15px 40px;
+    border-radius: 10px;
+    border: 2px solid grey;
 }

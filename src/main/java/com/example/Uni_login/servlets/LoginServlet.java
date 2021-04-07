@@ -56,8 +56,8 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("User", user);
             Cookie cookie = new Cookie("remember", session.getId());
             response.addCookie(cookie);
-            response.sendRedirect(request.getContextPath() + "/Dashboard");
-//            response.sendRedirect(request.getContextPath() + "/Edit?id="+user.getId());
+//            response.sendRedirect(request.getContextPath() + "/Dashboard");
+            response.sendRedirect(request.getContextPath() + "/Edit?id="+user.getId());
         }
         else {
             throw new Exception("Username or Password are incorrect");

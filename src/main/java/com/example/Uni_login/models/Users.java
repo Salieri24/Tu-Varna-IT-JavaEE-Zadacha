@@ -43,5 +43,18 @@ public class Users {    //collection of users
         }
         return null;
     }
+
+    public boolean saveUser(User user) {
+        if(Users.isEmpty()) return false;
+        for(User x : Users)
+        {
+            if (x.getId()==user.getId()){
+                Users.remove(x);
+                Users.add(user);
+                return true;
+            }
+        }
+        return false;
+    }
 }
 

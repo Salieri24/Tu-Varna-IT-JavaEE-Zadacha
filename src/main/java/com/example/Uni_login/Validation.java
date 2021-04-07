@@ -9,6 +9,6 @@ public final class Validation {
         return username.length()>8;
     }
     public static boolean checkName(String name) {
-        return name.length()>0;
+        return name.length()>2;
     }
 }

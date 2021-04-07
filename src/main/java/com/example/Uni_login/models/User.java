@@ -28,12 +28,10 @@ public class User implements Serializable { //user with different abilities
     public User(String name, String username, String password) {
         Random rand = new Random();
         id = rand.nextLong();
+
         this.name = name;
         this.username = username;
         this.password = password;
-
-        this.addProfAbility(new Ability("Java",50));
-        this.addPersAbility(new Ability("Communicaiton",62));
     }
 
     public long getId() {
