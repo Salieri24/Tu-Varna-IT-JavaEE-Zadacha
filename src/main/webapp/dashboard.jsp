@@ -8,6 +8,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
+<%--If session is invalid, redirect to the LoginPage--%>
+<c:if test="${sessionScope.User==null}">
+    <c:redirect url="/Login"/>
+</c:if>
+
+
 <jsp:useBean id="User" scope="session" type="com.example.Uni_login.models.User"/>
     <jsp:setProperty name="User" property="name" value="${(sessionScope.User.name != null) ? sessionScope.User.name : 'No information' }"/>
     <jsp:setProperty name="User" property="workName" value = "${(sessionScope.User.workName != null) ? sessionScope.User.workName : 'Unemployed' }"/>
@@ -24,6 +30,7 @@
 </head>
 <body>
 <div class="pane">
+    <c:import url="components/header.jsp"/>
     <div class="wrapper">
         <div class="profile-pane">
             <img src="webResources/images/user.png" alt="">

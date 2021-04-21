@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page pageEncoding="UTF-8" %>
 <html>
     <head>
@@ -8,6 +9,7 @@
     <body>
 
         <div class = "wrapper">
+            <c:import url="components/header.jsp"/>
             <h1>Влизане в системата</h1>
             <div class = "container">
                 <form method="post" action="${pageContext.request.contextPath}/Login">
@@ -24,9 +26,9 @@
                 <input type = "submit" value = "Вход">
                 </form>
             </div>
-            <%if(session.getAttribute("error")!=null){%>
+            <%if(request.getAttribute("error")!=null){%>
             <div class="error-field">
-                ${sessionScope.error}
+                ${requestScope.error}
             </div>
             <%}%>
         </div>

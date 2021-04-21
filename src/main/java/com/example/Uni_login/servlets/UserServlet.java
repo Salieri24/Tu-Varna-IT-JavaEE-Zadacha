@@ -19,7 +19,8 @@ public class UserServlet extends HttpServlet {
         Users users = repository.getUsers();
         User user = users.getUserById(id);
         if(user==null){
-            response.sendRedirect(request.getContextPath()+"/Dashboard");
+//            response.sendRedirect(request.getContextPath()+"/Dashboard");
+            throw new IOException("User with this id was not found!");
         }
         else{
                 request.setAttribute("user",user);

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page pageEncoding="UTF-8" %>
 <html>
     <head>
@@ -8,6 +9,7 @@
     <body>
 
         <div class = "wrapper">
+            <c:import url="components/header.jsp"/>
             <h1>Създаване на профил</h1>
             <div class = "container">
                 <form action = "${pageContext.request.contextPath}/Registration" method="post" >

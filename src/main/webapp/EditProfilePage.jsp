@@ -7,6 +7,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<c:if test="${sessionScope.User==null}">
+    <c:redirect url="/Login"/>
+</c:if>
+
 <html>
 <head>
     <title>EditProfilePage</title>
@@ -15,19 +19,20 @@
 <body>
 <div class="pane">
     <div class="wrapper">
+        <c:import url="components/header.jsp"/>
         <form method="post" action="${pageContext.request.contextPath}/Edit" id="edit">
         <div class="profile-pane">
             <img src="webResources/images/user.png" alt="">
             <div class="profile">
                 <h2>Профилна информация</h2>
                 <label class="flex-lbl">
-                    <input type="text" name="name" class="textbox" placeholder="Име:">
+                    <input type="text" name="name" class="textbox" placeholder="Име:" value = "${sessionScope.User.name}">
                 </label>
                 <label class="flex-lbl">
-                    <input type="text" name="work" class="textbox" placeholder="Работа:">
+                    <input type="text" name="work" class="textbox" placeholder="Работа:" value="${sessionScope.User.workName}">
                 </label>
                 <label class="flex-lbl">
-                    <textarea name="description" form="edit" placeholder="Описание:" class="textbox"></textarea>
+                    <textarea name="description" form="edit" placeholder="Описание:" class="textbox">${sessionScope.User.description}</textarea>
                 </label>
             </div>
         </div>
@@ -66,25 +71,25 @@
             <div class="info-pane">
                 <div class="info">
                     <label class="flex-lbl">
-                        <input type="email" name="email" class="textbox" placeholder="Имейл">
+                        <input type="email" name="email" class="textbox" placeholder="Имейл" value="${sessionScope.User.email}">
                     </label>
                 </div>
                 <div class="info">
                     <label class="flex-lbl">
-                        <input type="tel" name="phone" class="textbox" placeholder="Телефон">
+                        <input type="tel" name="phone" class="textbox" placeholder="Телефон" value="${sessionScope.User.phone}">
                     </label>
                 </div>
             </div>
             <div class="info-pane">
                 <div class="info">
                     <label class="flex-lbl">
-                        <input type="text" name="town" class="textbox" placeholder="Град">
+                        <input type="text" name="town" class="textbox" placeholder="Град" value="${sessionScope.User.town}">
                     </label>
                 </div>
                 <div class="info">
                     <label class="flex-lbl">
-<%--                        <input type="text" name="street">--%>
-                        <textarea name="street" form="edit" placeholder="Улица" class="textbox"></textarea>
+                        <input type="text" name="street" class="textbox" placeholder="Адрес" value="${sessionScope.User.address}">
+<%--                        <textarea name="street" form="edit" placeholder="Улица" class="textbox" ></textarea>--%>
                     </label>
 
                 </div>
