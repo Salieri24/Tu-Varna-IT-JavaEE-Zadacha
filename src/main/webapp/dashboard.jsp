@@ -32,6 +32,15 @@
 <div class="pane">
     <c:import url="components/header.jsp"/>
     <div class="wrapper">
+
+        <c:if test="${cookie.get('firstLoginPerDay')==null}">
+            <p>Добре дошли!</p>
+            <form method="get" action="${pageContext.request.contextPath}/ProfileServlet">
+                <input type="hidden" name="turnedOff" value="yes">
+                <input type="submit" value="Изключи">
+            </form>
+        </c:if>
+
         <div class="profile-pane">
             <img src="webResources/images/user.png" alt="">
             <div class="profile">

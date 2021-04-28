@@ -23,6 +23,7 @@ public class UserServlet extends HttpServlet {
             throw new IOException("User with this id was not found!");
         }
         else{
+
                 request.setAttribute("user",user);
                 request.getRequestDispatcher("EditProfilePage.jsp").forward(request,response);
             }
@@ -44,7 +45,7 @@ public class UserServlet extends HttpServlet {
         if(Validation.checkName(name))
         {
             Repository repository = new Repository();
-            if(repository.getUsers().saveUser(user))
+            if(repository.getUsers().checkForUser(user)!=null)
             {
                 user.setName(name);
                 user.setWorkName(work);
