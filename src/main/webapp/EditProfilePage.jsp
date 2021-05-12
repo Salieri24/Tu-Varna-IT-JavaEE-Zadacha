@@ -40,17 +40,16 @@
         <div class="inner-pane">
             <div class="ability-left">
                 <h3>Професионални</h3>
-                <div class="ability">
+                <div class="ability" id="skillsLeft">
+                    <c:forEach items="${requestScope.user.profAbilities}" var="skill">
                     <label class="flex-lbl">
-                        <input placeholder="Choose Skill." class="search-box" type="text" list="prof" name="persSkill" />
+                        <input placeholder="Choose Skill." class="search-box" type="text" name="persSkill" value="${skill.name}" />
+                        <input  class = "slider" type="range" min="1" max="100" value="${skill.percentage}">
+                        <button type="button" onclick="">Remove</button>
                     </label>
-                    <datalist id="prof">
-                        <option value="Java"></option>
-                        <option value="HTML"></option>
-                        <option value="CSS"></option>
-                    </datalist>
-                    <label >Skill level:<input  class = "slider" type="range" min="1" max="100" value="50"></label>
+                    </c:forEach>
                 </div>
+                <button type="button" onclick="addAbility()">Add Skill</button>
             </div>
             <div class="ability-right">
                 <h3>Личностни</h3>
@@ -100,6 +99,40 @@
     </div>
 
 </div>
+
+<script>
+    var i = 0;
+    var container = document.getElementById("skillsLeft");
+
+    function addAbility(){
+        // Container <div> where dynamic content will be placed
+        var containerLbl = document.createElement("label");
+        containerLbl.className= "flex-lbl";
+        container.appendChild(containerLbl);
+
+        // Create an <input> element, set its type and name attributes
+        var inputName = document.createElement("input");
+        var inputValue = document.createElement("input");
+        inputName.placeholder = "Choose skill";
+        inputName.className="search-box";
+        inputName.type = "text";
+        inputName.name = "SkillName" + i;
+        inputValue.type = "range";
+        inputValue.name = "SkillValue"+i++;
+        inputValue.min = "1";
+        inputValue.max = "100";
+        inputValue.className = "slider";
+        containerLbl.appendChild(inputName);
+        containerLbl.appendChild(inputValue);
+        var rmBtn = document.createElement("button");
+        rmBtn.type = "button";
+        rmBtn.onclick = function removeLbl() {
+            container.removeChild(containerLbl);
+        };
+        rmBtn.textContent = "Remove";
+        containerLbl.appendChild(rmBtn);
+    }
+</script>
 </body>
 </html>
 

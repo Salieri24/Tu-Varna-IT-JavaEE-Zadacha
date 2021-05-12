@@ -43,7 +43,6 @@
             <%}%>
             
         </div>
-        			<h1> Have an account?<br><a href="login.jsp">Log in</a> </h1>
         
     </body>
 </html>

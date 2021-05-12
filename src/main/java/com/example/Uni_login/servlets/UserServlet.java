@@ -2,6 +2,7 @@ package com.example.Uni_login.servlets;
 
 import com.example.Uni_login.Repository;
 import com.example.Uni_login.Validation;
+import com.example.Uni_login.models.Ability;
 import com.example.Uni_login.models.User;
 import com.example.Uni_login.models.Users;
 
@@ -9,6 +10,9 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 
 @WebServlet(name = "UserServlet", value = "/UserServlet")
 public class UserServlet extends HttpServlet {
@@ -38,6 +42,8 @@ public class UserServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         String town = request.getParameter("town");
         String street = request.getParameter("street");
+        Enumeration<String> n = request.getParameterNames();
+
 
         try {
         User user = (User)request.getSession(false).getAttribute("User");
@@ -47,6 +53,18 @@ public class UserServlet extends HttpServlet {
             Repository repository = new Repository();
             if(repository.getUsers().checkForUser(user)!=null)
             {
+                ArrayList<Ability> profSkill = new ArrayList<>() ;
+                while(n.hasMoreElements()){
+                    String parName =  n.nextElement();
+
+                    if(parName.startsWith("SkillName")){
+                        String parValue = request.getParameter("SkillValue"+(parName.charAt(parName.indexOf('e')+1)));
+                        Ability newAbility = new Ability(request.getParameter(parName),Integer.parseInt(parValue));
+                        profSkill.add(newAbility);
+                    }
+                }
+                user.setProfAbilities(profSkill);
+
                 user.setName(name);
                 user.setWorkName(work);
                 user.setDescription(description);
@@ -54,6 +72,7 @@ public class UserServlet extends HttpServlet {
                 user.setPhone(phone);
                 user.setTown(town);
                 user.setAddress(street);
+
                 repository.getUsers().saveUser(user);
                 request.getSession(false).setAttribute("User",user);
                 response.sendRedirect(request.getContextPath()+"/Dashboard");

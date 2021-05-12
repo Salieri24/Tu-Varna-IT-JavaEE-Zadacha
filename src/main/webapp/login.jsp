@@ -32,6 +32,5 @@
             </div>
             <%}%>
         </div>
-        <h1>Don't have an account?<br><a href="index.jsp">Create an account</a></h1>
     </body>
 </html>
