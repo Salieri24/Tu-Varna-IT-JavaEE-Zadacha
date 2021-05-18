@@ -116,3 +116,6 @@ li a {
     text-decoration: none;
     color: #012e5e;
 }
+.flex-lbl{
+    display:block;
+}
