@@ -15,15 +15,13 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long id = Long.parseLong(request.getParameter("id"));
-        Repository repository = new Repository();
-        Users users = repository.getUsers();
+        Users users = Repository.getInstance();
         User user = users.getUserById(id);
         if(user==null){
 //            response.sendRedirect(request.getContextPath()+"/Dashboard");
             throw new IOException("User with this id was not found!");
         }
         else{
-
                 request.setAttribute("user",user);
                 request.getRequestDispatcher("EditProfilePage.jsp").forward(request,response);
             }
@@ -40,28 +38,27 @@ public class UserServlet extends HttpServlet {
         String street = request.getParameter("street");
 
         try {
-        User user = (User)request.getSession(false).getAttribute("User");
-        if(user == null){ throw new Exception("user is null");}
-        if(Validation.checkName(name))
-        {
-            Repository repository = new Repository();
-            if(repository.getUsers().checkForUser(user)!=null)
+            User user = (User)request.getSession(false).getAttribute("User");
+            if(user == null){ throw new Exception("user is null");}
+            if(Validation.checkName(name) && Repository.getInstance().checkForUser(user)!=null)
             {
-                user.setName(name);
-                user.setWorkName(work);
-                user.setDescription(description);
-                user.setEmail(email);
-                user.setPhone(phone);
-                user.setTown(town);
-                user.setAddress(street);
-                repository.getUsers().saveUser(user);
-                request.getSession(false).setAttribute("User",user);
-                response.sendRedirect(request.getContextPath()+"/Dashboard");
+
+                    user.setName(name);
+                    user.setWorkName(work);
+                    user.setDescription(description);
+                    user.setEmail(email);
+                    user.setPhone(phone);
+                    user.setTown(town);
+                    user.setAddress(street);
+                    Repository.getInstance().saveUser(user);
+                    request.getSession(false).setAttribute("User",user);
+                    response.sendRedirect(request.getContextPath()+"/Dashboard");
+
+
             }
             else{
                 throw new Exception("Something went wrong");
             }
-        }
         } catch (Exception e) {
             e.printStackTrace();
             doGet(request,response);

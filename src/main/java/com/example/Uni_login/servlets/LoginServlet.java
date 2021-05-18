@@ -34,17 +34,17 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Users users = usersRep.getUsers();
+        Users users = Repository.getInstance();
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
         try {
-            if (!Validation.checkUsername(username)) {
+            if (Validation.checkUsername(username)) {
                 throw new Exception("Username must be valid");
             }
 
-            if (!Validation.checkPassword(password)) {
+            if (Validation.checkPassword(password)) {
                 throw new Exception("Password must be valid");
             }
 

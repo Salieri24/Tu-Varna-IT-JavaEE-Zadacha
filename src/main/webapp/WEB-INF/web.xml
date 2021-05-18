@@ -10,7 +10,6 @@
     <servlet-mapping>
         <servlet-name>RegistrationServlet</servlet-name>
         <url-pattern>/Registration</url-pattern>
-        <url-pattern>/</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>Dashboard</servlet-name>
@@ -29,4 +28,45 @@
         <url-pattern>*.css</url-pattern>
         <url-pattern>*.png</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ErrorHandler</servlet-name>
+        <servlet-class>com.example.Uni_login.servlets.ErrorHandler</servlet-class>
+    </servlet>
+    <!-- servlet mappings -->
+    <servlet-mapping>
+        <servlet-name>ErrorHandler</servlet-name>
+        <url-pattern>/ErrorHandler</url-pattern>
+    </servlet-mapping>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/ErrorHandler</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/ErrorHandler</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/ErrorHandler</location>
+    </error-page>
+
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.example.Uni_login.filters.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/Edit</url-pattern>
+        <url-pattern>/Dashboard</url-pattern>
+        <url-pattern>/ProfileServlet</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>EditFilter</filter-name>
+        <filter-class>com.example.Uni_login.filters.EditFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>EditFilter</filter-name>
+        <url-pattern>/Edit</url-pattern>
+    </filter-mapping>
 </web-app>

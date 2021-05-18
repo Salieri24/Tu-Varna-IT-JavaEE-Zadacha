@@ -60,3 +60,17 @@ li a {
     text-decoration: none;
     color: #012e5e;
 }
+.table {
+    color: #012e5e;
+    width:80%;
+    margin: 0 10%;
+}
+.table thead{
+    background-color: #ffb606;
+}
+td, th,.table {
+    border: 1px solid #ddd;
+    padding:8px;
+    border-collapse: collapse;
+}
+

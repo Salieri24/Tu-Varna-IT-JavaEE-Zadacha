@@ -18,5 +18,6 @@
                 <li><a href="${pageContext.request.contextPath}/Login">Вход</a></li>
             </c:otherwise>
         </c:choose>
+        <li><a href="${pageContext.request.contextPath}/AllPeople">Потребители</a></li>
     </ul>
 </nav>

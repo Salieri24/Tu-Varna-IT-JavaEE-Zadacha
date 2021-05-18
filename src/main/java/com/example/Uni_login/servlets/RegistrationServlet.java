@@ -12,12 +12,10 @@ import java.io.IOException;
 
 @WebServlet(name = "RegistrationServlet", value = "/RegistrationServlet")
 public class RegistrationServlet extends HttpServlet {
-    private Repository usersRep;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        usersRep= new Repository();
     }
 
     @Override
@@ -43,28 +41,15 @@ public class RegistrationServlet extends HttpServlet {
         String password2 = request.getParameter("password2");
 
         try {
-            if (!Validation.checkName(name)) {
-                throw new Exception("Name must be valid");
-            }
-            if (!Validation.checkUsername(username)) {
-                throw new Exception("Username must be valid");
-            }
+            Validation.checkUser(name,username,password,password2);
 
-            if (!Validation.checkPassword(password)) {
-                throw new Exception("Password must be valid");
-            }
-            if (!password.equals(password2)) {
-                throw new Exception("Passwords do not match!");
-            }
-
-
-            Users users = usersRep.getUsers();
-
+            Users users = Repository.getInstance();
             if(users.checkForUsername(username))
             {
                 throw new Exception("The username already exists!");
             }
             else{
+
                 User user = new User(name,username,password);
                 users.addUser(user);
 
@@ -73,7 +58,6 @@ public class RegistrationServlet extends HttpServlet {
         } catch (Exception e)
         {
             request.setAttribute("error","Error: "+e.getMessage());
-
             doGet(request,response);
         }
 
