@@ -4,10 +4,9 @@ import com.example.Uni_login.Repository;
 import com.example.Uni_login.models.User;
 
 import javax.servlet.*;
-import javax.servlet.annotation.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebFilter(description = "Filter all unauthorized access.")

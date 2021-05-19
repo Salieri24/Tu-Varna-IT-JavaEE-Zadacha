@@ -49,18 +49,24 @@ public class UserServlet extends HttpServlet {
             if(user == null){ throw new Exception("user is null");}
             if(Validation.checkName(name) && Repository.getInstance().checkForUser(user)!=null)
             {
-                ArrayList<Ability> profSkill = new ArrayList<>() ;
+                ArrayList<Ability> profSkill = new ArrayList<>();
+                ArrayList<Ability> persSkill = new ArrayList<>();
                 while(n.hasMoreElements()){
                     String parName =  n.nextElement();
 
-                    if(parName.startsWith("SkillName")){
-                        String parValue = request.getParameter("SkillValue"+(parName.charAt(parName.indexOf('e')+1)));
+                    if(parName.startsWith("LSkillName")){
+                        String parValue = request.getParameter("LSkillValue"+(parName.charAt(parName.indexOf('e')+1)));
                         Ability newAbility = new Ability(request.getParameter(parName),Integer.parseInt(parValue));
                         profSkill.add(newAbility);
                     }
+                    else if(parName.startsWith("RSkillName")){
+                        String parValue = request.getParameter("RSkillValue"+(parName.charAt(parName.indexOf('e')+1)));
+                        Ability newAbility = new Ability(request.getParameter(parName),Integer.parseInt(parValue));
+                        persSkill.add(newAbility);
+                    }
                 }
                 user.setProfAbilities(profSkill);
-
+                user.setPersAbilities(persSkill);
                 user.setName(name);
                 user.setWorkName(work);
                 user.setDescription(description);

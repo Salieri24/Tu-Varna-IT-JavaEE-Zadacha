@@ -6,7 +6,7 @@
   Time: 10:09
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 
 <jsp:useBean id="User" scope="session" type="com.example.Uni_login.models.User"/>
     <jsp:setProperty name="User" property="name" value="${(sessionScope.User.name != null) ? sessionScope.User.name : 'No information' }"/>

@@ -1,19 +1,36 @@
 package com.example.Uni_login.models;
 
+import com.example.Uni_login.Repository;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.File;
 import java.util.HashSet;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Users {    //collection of users
-
-    private HashSet<User> Users = new HashSet<>();
+    @XmlElementWrapper
+    private HashSet<User> users = new HashSet<>();
 
     public HashSet<User> getUserList() {
-        return Users;
+        return users;
     }
+    public void setUsers(HashSet<User> users) {
+        this.users = users;
+    }
+
     public void addUser(User user) {
-        Users.add(user);
+        users.add(user);
+        Repository.writeToXMLFile();
     }
     public User checkForUser(User user){
-        for(User x : Users)
+        for(User x : users)
         {
             if (x.equals(user)) {
                 return x;
@@ -23,10 +40,10 @@ public class Users {    //collection of users
     }
     //Check for an already existing username
     public boolean checkForUsername(String username){
-        if(Users.isEmpty()) return false;
-        for(User x : Users)
+        if(users.isEmpty()) return false;
+        for(User x : users)
         {
-            if (x.getName().equals(username)){
+            if (x.getUsername().equals(username)){
                 return true;
             }
         }
@@ -34,8 +51,8 @@ public class Users {    //collection of users
     }
 
     public User getUserById(long id) {
-        if(Users.isEmpty()) return null;
-        for(User x : Users)
+        if(users.isEmpty()) return null;
+        for(User x : users)
         {
             if (x.getId()==id){
                 return x;
@@ -44,17 +61,17 @@ public class Users {    //collection of users
         return null;
     }
 
-    public boolean saveUser(User user) {
-        if(Users.isEmpty()) return false;
-        for(User x : Users)
+    public void saveUser(User user) {
+        if(users.isEmpty()) return;
+        for(User x : users)
         {
             if (x.getId()==user.getId()){
-                Users.remove(x);
-                Users.add(user);
-                return true;
+                users.remove(x);
+                addUser(user);
+                return;
             }
         }
-        return false;
+        addUser(user);
     }
 }
 

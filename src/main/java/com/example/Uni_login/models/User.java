@@ -1,11 +1,14 @@
 package com.example.Uni_login.models;
 
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
+@XmlRootElement(name="user")
 public class User implements Serializable { //user with different abilities
     private long id;
     private String name;
@@ -17,7 +20,10 @@ public class User implements Serializable { //user with different abilities
     private String town;
     private String phone;
     private String address;
+
+
     private List<Ability> profAbilities = new ArrayList<>();
+
     private List<Ability> persAbilities = new ArrayList<>();
 
     public User() {
@@ -110,6 +116,7 @@ public class User implements Serializable { //user with different abilities
         this.address = address;
     }
 
+    @XmlElementWrapper
     public List<Ability> getProfAbilities() {
         return profAbilities;
     }
@@ -118,6 +125,7 @@ public class User implements Serializable { //user with different abilities
         this.profAbilities = profAbilities;
     }
 
+    @XmlElementWrapper
     public List<Ability> getPersAbilities() {
         return persAbilities;
     }

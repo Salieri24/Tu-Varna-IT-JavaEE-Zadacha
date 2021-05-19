@@ -1,10 +1,9 @@
 package com.example.Uni_login.filters;
 
-import com.example.Uni_login.Repository;
 import com.example.Uni_login.models.User;
 
 import javax.servlet.*;
-import javax.servlet.annotation.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -24,6 +23,7 @@ public class EditFilter implements Filter {
 
         User user = (User) req.getSession(false).getAttribute("User");
         long id = Long.parseLong(req.getParameter("id"));
+
         if(user.getId() == id){
                 chain.doFilter(request, response);
         }
