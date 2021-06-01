@@ -7,15 +7,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-
-<jsp:useBean id="User" scope="session" type="com.example.Uni_login.models.User"/>
-    <jsp:setProperty name="User" property="name" value="${(sessionScope.User.name != null) ? sessionScope.User.name : 'No information' }"/>
-    <jsp:setProperty name="User" property="workName" value = "${(sessionScope.User.workName != null) ? sessionScope.User.workName : 'Unemployed' }"/>
-    <jsp:setProperty name="User" property="description" value="${(sessionScope.User.description != null) ? sessionScope.User.description : 'Empty' }"/>
-    <jsp:setProperty name="User" property="email" value="${(sessionScope.User.email != null) ? sessionScope.User.email : 'no Email' }"/>
-    <jsp:setProperty name="User" property="town" value="${(sessionScope.User.town != null) ? sessionScope.User.town : 'no Info' }"/>
-    <jsp:setProperty name="User" property="phone" value="${(sessionScope.User.phone != null) ? sessionScope.User.phone : 'no Phone' }"/>
-    <jsp:setProperty name="User" property="address" value="${(sessionScope.User.address != null) ? sessionScope.User.address : 'no Info' }"/>
+<jsp:useBean id="User" scope="request" type="com.example.Uni_login.models.User"/>
+    <jsp:setProperty name="User" property="name" value="${(requestScope.User.name != null) ? requestScope.User.name : 'No information' }"/>
+    <jsp:setProperty name="User" property="workName" value = "${(requestScope.User.workName != null) ? requestScope.User.workName : 'Unemployed' }"/>
+    <jsp:setProperty name="User" property="description" value="${(requestScope.User.description != null) ? requestScope.User.description : 'Empty' }"/>
+    <jsp:setProperty name="User" property="email" value="${(requestScope.User.email != null) ? requestScope.User.email : 'no Email' }"/>
+    <jsp:setProperty name="User" property="town" value="${(requestScope.User.town != null) ? requestScope.User.town : 'no Info' }"/>
+    <jsp:setProperty name="User" property="phone" value="${(requestScope.User.phone != null) ? requestScope.User.phone : 'no Phone' }"/>
+    <jsp:setProperty name="User" property="address" value="${(requestScope.User.address != null) ? requestScope.User.address : 'no Info' }"/>
 
 <html>
 <head>
@@ -27,9 +26,9 @@
     <c:import url="components/header.jsp"/>
     <div class="wrapper">
 
-        <c:if test="${cookie.get('firstLoginPerDay')==null}">
+        <c:if test="${cookie.get('firstLoginPerDay')==null && sessionScope.User==requestScope.User}">
             <p>Добре дошли!</p>
-            <form method="get" action="${pageContext.request.contextPath}/ProfileServlet">
+            <form method="post" action="${pageContext.request.contextPath}/Dashboard">
                 <input type="hidden" name="turnedOff" value="yes">
                 <input type="submit" value="Изключи">
             </form>

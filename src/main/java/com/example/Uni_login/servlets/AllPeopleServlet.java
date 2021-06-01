@@ -17,7 +17,7 @@ public class AllPeopleServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("users", Repository.getInstance());
+        request.setAttribute("users", Repository.getInstance().getUsers());
         request.getRequestDispatcher("/AllPeople.jsp").forward(request,response);
     }
 

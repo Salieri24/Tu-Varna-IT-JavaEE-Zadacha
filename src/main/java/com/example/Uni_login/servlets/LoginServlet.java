@@ -12,11 +12,9 @@ import java.io.IOException;
 
 @WebServlet(name = "LoginServlet", value = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
-    private Repository usersRep;
     @Override
     public void init() throws ServletException {
         super.init();
-        usersRep= new Repository();
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,7 +32,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Users users = Repository.getInstance();
+        Users users = Repository.getInstance().getUsers();
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");

@@ -27,7 +27,7 @@ public class EditFilter implements Filter {
         if(user.getId() == id){
                 chain.doFilter(request, response);
         }
-        else res.sendRedirect(req.getContextPath() +"/Dashboard");
+        else res.sendRedirect(req.getContextPath() +"/Dashboard?id="+id);
 
     }
 }

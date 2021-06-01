@@ -11,14 +11,6 @@
         <servlet-name>RegistrationServlet</servlet-name>
         <url-pattern>/Registration</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>Dashboard</servlet-name>
-        <jsp-file>/dashboard.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Dashboard</servlet-name>
-        <url-pattern>/Dashboard</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/Edit</url-pattern>
@@ -58,8 +50,6 @@
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/Edit</url-pattern>
-        <url-pattern>/Dashboard</url-pattern>
-        <url-pattern>/ProfileServlet</url-pattern>
     </filter-mapping>
     <filter>
         <filter-name>EditFilter</filter-name>

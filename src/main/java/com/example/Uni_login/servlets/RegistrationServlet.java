@@ -43,7 +43,7 @@ public class RegistrationServlet extends HttpServlet {
         try {
             Validation.checkUser(name,username,password,password2);
 
-            Users users = Repository.getInstance();
+            Users users = Repository.getInstance().getUsers();
             if(users.checkForUsername(username))
             {
                 throw new Exception("The username already exists!");

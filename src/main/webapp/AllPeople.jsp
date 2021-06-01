@@ -22,16 +22,14 @@
                     <th>Потребител</th>
                     <th>Работа</th>
                     <th>Информация</th>
-                    <th></th>
                 </tr>
           </thead>
           <tbody>
               <c:forEach items="${requestScope.users.userList}" var="person">
                 <tr>
-                    <td>${person.name}</td>
+                    <td><a href="${pageContext.request.contextPath}/Edit?id=${person.id}">${person.name}</a></td>
                     <td>${person.workName}</td>
                     <td>${person.description}</td>
-                  <c:if test="${sessionScope.User.id == person.id}"> <td><a class="btn" href="${pageContext.request.contextPath}/Edit?id=${person.id}">Редактирай</a></td> </c:if>
                 </tr>
               </c:forEach>
           </tbody>

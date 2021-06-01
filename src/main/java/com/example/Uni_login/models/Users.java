@@ -1,6 +1,7 @@
 package com.example.Uni_login.models;
 
 import com.example.Uni_login.Repository;
+import com.example.Uni_login.xml.JaxbFileSave;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -27,7 +28,7 @@ public class Users {    //collection of users
 
     public void addUser(User user) {
         users.add(user);
-        Repository.writeToXMLFile();
+        JaxbFileSave.writeToXMLFile(this);
     }
     public User checkForUser(User user){
         for(User x : users)

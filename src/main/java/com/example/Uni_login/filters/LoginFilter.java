@@ -23,7 +23,7 @@ public class LoginFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
 
         User user = (User) req.getSession(false).getAttribute("User");
-        if(user != null && user == Repository.getInstance().getUserById(user.getId())){
+        if(user != null && user == Repository.getInstance().getUsers().getUserById(user.getId())){
                 chain.doFilter(request, response);
         }
         else res.sendRedirect(req.getContextPath() +"/Login");

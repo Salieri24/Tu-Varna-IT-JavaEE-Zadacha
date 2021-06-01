@@ -19,7 +19,7 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long id = Long.parseLong(request.getParameter("id"));
-        Users users = Repository.getInstance();
+        Users users = Repository.getInstance().getUsers();
         User user = users.getUserById(id);
         if(user==null){
 //            response.sendRedirect(request.getContextPath()+"/Dashboard");
@@ -47,7 +47,7 @@ public class UserServlet extends HttpServlet {
         try {
             User user = (User)request.getSession(false).getAttribute("User");
             if(user == null){ throw new Exception("user is null");}
-            if(Validation.checkName(name) && Repository.getInstance().checkForUser(user)!=null)
+            if(Validation.checkName(name) && Repository.getInstance().getUsers().checkForUser(user)!=null)
             {
                 ArrayList<Ability> profSkill = new ArrayList<>();
                 ArrayList<Ability> persSkill = new ArrayList<>();
@@ -75,9 +75,9 @@ public class UserServlet extends HttpServlet {
                 user.setTown(town);
                 user.setAddress(street);
 
-                Repository.getInstance().saveUser(user);
+                Repository.getInstance().getUsers().saveUser(user);
                 request.getSession(false).setAttribute("User",user);
-                response.sendRedirect(request.getContextPath()+"/Dashboard");
+                response.sendRedirect(request.getContextPath()+"/Dashboard?id="+user.getId());
             }
             else{
                 throw new Exception("Something went wrong");

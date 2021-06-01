@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class UsersUnitTest {
     @Test
     public void xmlTest(){
-        Repository.getInstance().saveUser(new User("name1","username1","password1"));
+        Repository.getInstance().getUsers().saveUser(new User("name1","username1","password1"));
 
     }
 }
